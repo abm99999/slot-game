@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABM333 Slot Game</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg,#000428,#004e92);
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+    .game {
+      width: 90%;
+      max-width: 360px;
+      background: #111;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+    }
+    .slots {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+    .slot {
+      width: 90px;
+      height: 90px;
+      background: #222;
+      border-radius: 12px;
+      font-size: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #555;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      background: gold;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    .info {
+      margin-top: 10px;
+      min-height: 24px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="game">
+  <h2>🎰 ABM333 Slot</h2>
+  <p>Coins: <span id="coins">100</span></p>
+
+  <div class="slots">
+    <div class="slot" id="s1">❓</div>
+    <div class="slot" id="s2">❓</div>
+    <div class="slot" id="s3">❓</div>
+  </div>
+
+  <button onclick="spin()">SPIN</button>
+  <div class="info" id="msg"></div>
+</div>
+
+<script>
+  let coins = 100;
+  const symbols = ["🍒","🍋","⭐","🔔","💎"];
+
+  function rand() {
+    return symbols[Math.floor(Math.random()*symbols.length)];
+  }
+
+  function spin(){
+    if(coins < 10){
+      msg.innerText = "❌ Coins শেষ";
+      return;
+    }
+    coins -= 10;
+    let a = rand(), b = rand(), c = rand();
+    s1.innerText = a;
+    s2.innerText = b;
+    s3.innerText = c;
+
+    if(a===b && b===c){
+      coins += 50;
+      msg.innerText = "🎉 JACKPOT +50";
+    } else {
+      msg.innerText = "😢 Try again";
+    }
+    document.getElementById("coins").innerText = coins;
+  }
+</script>
+
+</body>
+</html>
